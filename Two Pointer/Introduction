@@ -1,0 +1,30 @@
+INTRODUCTION
+
+Two Pointers appraoch has two pointer moves to find answers
+
+Time Complexity - O(N) 
+
+Types of Two Pointers :
+
+  1. Opposite Direction : One pointer starts at the beginning, another at the end. They move towards each other.
+     Example: Two Sum II, Reverse String, Palindrome.
+
+  2. Same Direction / Fast and Slow Pointers : Both start from the beginning, but move at different speeds or under different conditions.
+    Example: Remove Duplicates, Move Zeroes.
+**** Usually:
+- fast explores elements.
+- slow maintains the position where the next valid element should go.
+
+  3. Sliding Window (related pattern) : Two pointers represent the boundaries of a window.
+     Example: Longest Substring Without Repeating Characters.
+
+  4. Two Pointers on Two Arrays : One pointer for each array.
+     Example: Merge Sorted Array, Intersection of Two Arrays.
+
+
+Important interview tips :
+
+1. Use while (left < right) when pointers must not cross. Use while (left <= right) when the middle element must also be processed.
+2. Handle empty arrays and arrays of size 1.
+3. Be careful with duplicate elements.
+

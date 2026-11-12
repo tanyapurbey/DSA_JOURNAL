@@ -1,0 +1,131 @@
+Problem NO. 1 and 167
+
+You are given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You can return the answer in any order.
+
+Brute force : 
+two nested loops and just add and check equality with target.
+
+for(int i = 0 ; i < nums.length ; i++){
+            for(int j = i + 1 ; j < nums.length ; j++){
+                if(nums[j] + nums[i] == target){
+                    return new int[]{i , j};
+                }
+            }
+        }
+        return new int[]{};
+    }
+}
+Time complexity - O(N^2)
+Space complexity - O(1)
+
+
+
+Better appraoch :
+Hashmap can be used. 
+For example : [2,5,7,11] and we want target to be 12. Then the logic i have 5 in the array but whatever 12-5 = 7 is also present in array then we got the answer actually.
+So we will try to find the complemnent of the target and current number , if exists then we got the pair.
+
+
+HashMap<Integer,Integer> m = new HashMap<>();
+for(int i = 0 ; i < nums.length ; i++){
+  if(m.containsKey(target - nums[i])){
+      return new int[]{i , m.get(target-nums[i])};
+  }
+  m.put(nums[i],i);
+}
+return new int[]{};
+
+Time Complexity : O(N)
+Space Complexity : O(N)
+
+
+
+Optimal Approach :
+IF ARRAY IS SORTED then apply two pointer because we can have left and right pointers. calcuLate the sum greater than target then shift right and sum is lesser then shift left.
+
+ int left = 0 ;
+        int right = numbers.length - 1 ;
+        while(left < right){
+            int sum = numbers[left] + numbers[right] ;
+            if(sum == target){
+                return new int[]{left + 1 , right + 1};
+            }
+            if(sum > target){
+                right--;
+            }
+            else{
+                left++;
+            }        
+        }
+        return new int[]{};
+
+Time complexity : O(N)
+Space complexity : O(1)
+
+
+
+wHAT IF ??? I want to try two pointer on unsorted array then we can sort it and then apply.
+now the problem while we want to store the array , array element will change its position so how we can get correct index.
+
+
+import java.util.Arrays;
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[][] copy = new int[nums.length][2];
+
+        for (int i = 0; i < nums.length; i++) {
+            copy[i][0] = nums[i];
+            copy[i][1] = i;
+        }
+
+        Arrays.sort(copy, (a, b) -> Integer.compare(a[0], b[0])
+        );
+
+        int left = 0;
+        int right = copy.length - 1;
+
+        while (left < right) {
+            int sum = copy[left][0] + copy[right][0];
+
+            if (sum == target) {
+                return new int[]{
+                    copy[left][1], copy[right][1]
+                };
+            }
+
+            if (sum > target) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+
+        return new int[]{};
+    }
+}
+
+Time Complexity - O(NlogN)
+Space - O(N)
+
+Understanding lambda expression
+
+Integer.compare() is a built-in Java method used to compare two integer values.
+1. Syntax
+Integer.compare(a, b);
+System.out.println(Integer.compare(10, 20)); // -1
+System.out.println(Integer.compare(10, 10)); // 0
+System.out.println(Integer.compare(20, 10)); // 1
+
+a represents one row of the 2D array.
+b represents another row.
+a[0] represents the value.
+b[0] represents the value of the other row.
+
+
+
+
+ 
+
